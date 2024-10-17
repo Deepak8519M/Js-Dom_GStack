@@ -1,0 +1,1067 @@
+<!-- 
+
+---------------------------------------------------------------------------------------------------------------------
+DOM: 
+ 
+    The DOM is an application programming interface (API) for manipulating HTML
+    documents.
+
+    The DOM provides functions or some methods that allow you to add, remove, and modify part of document effectively.
+
+---------------------------------------------------------------------------------------------------------------------    
+    DOM represents the HTML document as a tree of nodes.
+
+    A few nodes of html document can be shown below.
+
+            <!DOCTYPE html> - Document type node
+            <html lang="en"> </html> - element type node
+            <head> </head> - element type node
+            <p> </p> - element type node
+            <a>Hello</a> - here text in anchor tag is considered as Text type node 
+
+    
+    Node Relationships:
+        
+        Any Node has relationship to other nodes in the DOM tree, and it is same as described as traditional tree.
+
+            like, parent-child,child-parent,sibling relationship etc...
+    child------------------------------------------------------------------------------------------------------------------
+
+3.Selecting elements using DOM
+
+    1.getElementById():
+
+            returns element obj that reprsents an html element.
+
+            It is only available in document object.
+
+            here if the id do not exist then it returns null
+
+            Since id is unique it is efficient and quick way to return single elemechild the html document.
+
+                    Ex1:<div>
+                            <p id="message">javascript Dom</p>
+                        </div>
+                        
+                        <script>
+                            let msg = document.getElementById("message");
+                            console.log(msg);
+                        </script>  
+
+                    Ex2:<div>
+                            <p id="message">javascript Dom</p> - retunrs this
+                            <p id="message">javascript</p>
+                        </div>
+
+                        <script>
+                            let msg = document.getElementById("message");
+                            console.log(msg);
+                        </script>
+
+                        here it returns the first matching id only.
+    
+    2.getElementsByName(): - 
+    
+            A few html elems has name attrb so we can use this to access those elmes.
+
+            This name attrb can be common among elems.
+
+            It returns a node list.
+
+        
+                        Ex: <div>
+                                <input type="radio" name="language" value="javascript" />
+                                <input type="radio" name="language" value="python" />
+                            </div>
+
+                            <script>
+                                let btn = document.getElementsByName("language");
+                                console.log(btn);
+                            </script>                             
+    
+    3.getElementsByTagName():
+
+            It is a method that accepts a  tag name and returns a live HTML COLLECTION of elements.
+
+
+                        Ex: <div>
+                                <h1>first heading</h1>
+                                <h1>second heading</h1>
+                                <h1>third heading</h1>
+                                <h1>fourth heading</h1>
+                            </div>
+
+                            <script>
+                                let heading = document.getElementsByTagName("h1");
+                                console.log(heading);
+                            </script>   - HTMLCollection(4) [h1, h1, h1, h1]
+                                        
+    4.getElementsByClassName():
+    
+             getElementsByClassName() returns an array-like of objects of the child elements with a specified class name.     
+             
+             It is available on document or on other elem also.
+
+             So it basically return an collection of html elements of same class name of the document or within the elems.
+
+
+                Ex1:    <div>
+                            <h1 class="message">1</h1>
+                            <h1 class="message">2</h1>
+                            <h1 class="message">3</h1>
+                        </div>
+
+                        <script>
+                            let msg = document.getElementsByClassName("message");
+                            console.log(msg);
+
+                        </script>  - HTMLCollection(3) [h1.message, h1.message, h1.message]
+                                        
+            We can also use this for elemetns also for ex:
+
+                Ex2:    <div>
+                            <h1 class="message">1</h1>
+                            <div id="container">
+                                <h1 class="message">2</h1>
+                                <h1 class="message">3</h1>
+                            </div>
+                        </div>
+
+                        <script>
+                            let cont = document.getElementById("container");
+                            let msg = cont.getElementsByClassName("message");
+                            console.log(msg);
+
+                        </script> - HTMLCollection(2) [h1.message, h1.message]                
+
+    5.querySelector():
+    
+            querySelector() method allows you to select the first element that matches the one or more css selectors.
+            
+            It can be applicable on element also.
+
+                    Ex1:    <div>
+                            <h1 class="message">1</h1>
+                            <div id="container">
+                                <h1 class="message">2</h1>
+                                <h1 class="message">3</h1>
+                            </div>
+                            </div>
+
+                            <script>
+                            let msg = document.querySelector(".message");
+                            console.log(msg);
+
+                            </script> returns single elment -> <h1 class="message">1</h1>
+
+                    Ex2:    <div>
+                            <h1 class="message">1</h1>
+                            <div id="container">
+                                <h1 class="message">2</h1>
+                                <h1 class="message">3</h1>
+                            </div>
+                            </div>
+
+                            <script>
+                            let cont = document.getElementById("container");
+                            let msg = cont.querySelector(".message");
+                            console.log(msg);
+
+                            </script> returns single elment -> <h1 class="message">2</h1>
+
+    6.querySelectorAll():
+    
+                    Returns all the elems mathcing with the css selectors
+
+                    here inside we can add id's, class names, tagNames etc..
+
+                    It returns a Node list.
+
+                    Ex1:    <div>
+                                <h1 class="message">1</h1>
+                                <div id="container">
+                                    <h1 class="message">2</h1>
+                                    <h1 class="message">3</h1>
+                                </div>
+                            </div>
+
+                            <script>
+                                let cont = document.getElementById("container");
+                                let msg = cont.querySelectorAll(".message");
+                                console.log(msg);
+                            </script>  
+
+
+                    Ex2:    <div>
+                            <h1 class="message">1</h1>
+                            <div id="container">
+                                <h1 class="message">2</h1>
+                                <h1 class="message">3</h1>
+                            </div>
+                            </div>
+
+                            <script>
+                            let msg = document.querySelectorAll(".message");
+                            console.log(msg);
+
+                            </script> - NodeList(3) [h1.message, h1.message, h1.message]                                
+                            
+                    let msg = cont.querySelectorAL("#message");  ret                           
+                    let msg = cont.querySelectorAL("div");                            
+                    let msg = cont.querySelectorAL("h1");                            
+                    let msg = cont.querySelectorAL("div h1");                            
+                    let msg = cont.querySelectorAL("div,h1");                            
+
+                    
+
+4.Traversing Elements:
+
+    To get the parent node of a specified node in the DOM tree, we can use the parentNode property.
+
+    ParentNode:     <div id="title">
+                        <p class="text">Welocome</p>
+                    </div>
+                    <script>
+                        let txt = document.querySelector("text");
+                        console.log(txt.parentNode);
+                    </script>
+                                                
+    Here we have some other methods like firstChild, lastChild which can cause errors due to indentation so let's leave the topic and focus on other alternatives.
+    
+
+
+    ChildNode:  returns all child nodes of parent.
+
+                here even empty spaces are included.
+    
+                    <div class="title">
+                        <p>Welocome1</p>
+                        <p>Welocome2</p>
+                        <p>Welocome3</p>
+                        <p>Welocome4</p>
+                    </div>
+                    <script>
+                        let parent = document.querySelector(".title");
+                        console.log(parent.childNodes);
+
+                    </script> - NodeList(9) [text, p, text, p, text, p, text, p, text] 
+                    
+    firstElementChild: returns first child of the parent
+
+                        <div class="title">
+                            <p>Welocome1</p>
+                            <p>Welocome2</p>
+                            <p>Welocome3</p>
+                            <p>Welocome4</p>
+                        </div>
+                        <script>
+                            let parent = document.querySelector(".title");
+                            console.log(parent.firstElementChild);
+                        </script>    
+
+    lastElementChild: returns last child of the parent
+
+                        <div class="title">
+                            <p>Welocome1</p>
+                            <p>Welocome2</p>
+                            <p>Welocome3</p>
+                            <p>Welocome4</p>
+                        </div>
+                        <script>
+                            let parent = document.querySelector(".title");
+                            console.log(parent.lastElementChild);
+                        </script>
+
+
+    previousElementChild: Included in the below exmaple code
+
+
+    nextElementChild: Included in the below exmaple code
+
+
+Example of all 4:
+
+            <div class="title">
+                <p class="first">Welocome1</p>
+                <p class="second">Welocome2</p>
+                <p class="third">Welocome3</p>
+                <p class="fourth">Welocome4</p>
+            </div>
+            <script>
+                let first = document.querySelector(".first");
+                let second = document.querySelector(".second");
+                let third = document.querySelector(".third");
+                let fourth = document.querySelector(".fourth");
+
+                console.log(first.previousElementSibling);
+                console.log(first.nextElementSibling);
+
+                console.log(second.previousElementSibling);
+                console.log(second.nextElementSibling);
+
+                console.log(third.previousElementSibling);
+                console.log(third.nextElementSibling);
+
+                console.log(fourth.previousElementSibling);
+                console.log(fourth.nextElementSibling);
+            </script>    
+
+
+
+5.Manipulating HTML Elements:
+    
+    1. createElement():
+
+            To create an html elem we use this method.
+
+            The document.createElement() accepts an HTML tag name and returns a NEW Node with elem type.
+
+    To create Element:
+
+                <script>
+                    let div = document.createElement("div");
+                    console.log(div);
+
+                </script> - returns <div> </div>.
+
+
+    To add html content:
+
+                <script>
+                    let div = document.createElement("div");
+                    div.innerHTML = "<p>Hello</p>";
+                    console.log(div);
+                </script>
+
+
+    To add this elem on the webpage or body.
+
+                <script>
+                    let div = document.createElement("div");
+                    div.innerHTML = "<p>Hello</p>";
+                    document.body.appendChild(div);
+                </script>
+
+    innerHtml is used so that html functionality also gets executed.                
+
+    To add attrbs like class and id.
+
+                <script>
+                    let div = document.createElement("div");
+                    div.innerHTML = "<p>Hello</p>";
+
+                    div.className = "word";
+                    div.id = "title";
+
+                    console.log(div);
+                </script>    
+                
+
+                
+appendChild():  
+
+    We mainly use appendChild() method to add a node to the end of the list of child nodes of a  specified parent node.
+
+    It is used to move an existing child node to the new position within the document.
+
+
+            <ul id="menu">
+                <li>Home</li>
+                <li>Blog</li>
+                <li>About</li>
+                <li>Project</li>
+            </ul>
+            <script>
+                let menu = document.getElementById("menu");
+                let list = document.createElement("li");
+                list.innerHTML = "Contact";
+                menu.appendChild(list);
+            </script>  
+            
+            
+textContent:
+    
+    To get the text content of a node and its descendents, we use the txtContetn property.
+
+        Here we are printing the ul element:
+
+            <script>
+                let menu = document.getElementById("menu");
+                console.log(menu);
+            </script>
+
+            O/P:        <ul id="menu">
+                            <li>Home</li>
+                            <li>Blog</li>
+                            <li>About</li>
+                            <li>Project</li>
+                        </ul>
+
+
+        Here we are displaying the content of #menu using textContent property or method.
+                        
+            <script>
+                let menu = document.getElementById("menu");
+                console.log(menu);
+            </script>     
+            
+            O/P:        Home
+                        Blog
+                        About
+                        Project
+        
+                        
+        Here we are using innerText which do obeys the rule of css properties before displaying the text.
+        
+            <ul id="menu">
+                <li>Home</li>
+                <li>Blog</li>
+                <li>About</li>
+                <li style="display: none">Project</li> - this rule will be followed.
+            </ul>
+            <script>
+                let menu = document.getElementById("menu");
+                console.log(menu.innerText);
+            </script>  
+            
+            O/P:        Home
+                        Blog
+                        About
+                                    
+    We can use textContent to insert values as shown below.
+
+            <ul id="menu">
+                <li>Home</li>
+                <li>Blog</li>
+                <li>About</li>
+                <li style="display: none">Project</li>
+            </ul>
+            <script>
+                let menu = document.getElementById("menu");
+                menu.textContent = "Hello!";
+
+            </script> - Hello!
+
+
+    textContent, it replaces all the content of the element it's called on, including the child elements. In your case, by setting menu.textContent = "Hello!";, you're replacing all the <li> elements inside the <ul> with the text "Hello!". 
+        
+------------------------------------------------------------------------------------------------ 
+
+    We can use after() method to insert one or more nodes after the element.
+
+            Element.after(node)
+
+    It can accept multiple nodes.
+
+            Element.after(node1,node2,node3,node4,...)
+
+    We can also add multiple strings.
+    
+            Element.after(node1,node2,node3,node4,...)
+
+------------------------------------------------------------------------------------------------ 
+
+append(): It can append mulitple elemetns as child to a parent at once at the end and it can 
+          can even add strings.
+            
+        parentNode.append(newNodes);
+
+------------------------------------------------------------------------------------------------
+
+prepend():  It add new node as firstChild of parentNode.
+
+        parentNode.prepend(newNodes);
+
+------------------------------------------------------------------------------------------------         
+insertAdjacentHTML(): 
+
+    element.insertAdjacentHTML(positionName, text)
+
+    here postionName can be beforeBegin, afterBegin, beforeEnd, afterEnd.
+
+            <ul id="menu">
+                <li>Home</li>
+                <li>Blog</li>
+                <li>About</li>
+                <li style="display: none">Project</li>
+            </ul>
+            <script>
+                let menu = document.getElementById("menu");
+                menu.insertAdjacentHTML("afterbegin", "<li>Content</li>");
+                console.log(menu);
+            </script>        
+
+------------------------------------------------------------------------------------------------         
+replaceChild():
+
+    use to replace old child with new child.
+
+    parentNode.repalaceChild(newChild, oldChild);
+
+------------------------------------------------------------------------------------------------ 
+
+cloneNode():
+
+    To clone an elem we use this method.
+    So new Node has copy of orginal node.
+
+    Syntax: let newNode = originalNode.cloneNode();
+
+            <ul id="menu">
+                <li>Home</li>
+                <li>Blog</li>
+                <li>About</li>
+                <li style="display: none">Project</li>
+            </ul>
+            <script>
+                let menu = document.getElementById("menu");
+                let newNode = menu.cloneNode();
+                console.log(newNode);
+
+            </script> - returns <ul id="menu"> </ul>
+
+---------------------------------------------------------------------------------------------------------------- 
+
+    To get (i.e clone) itself and its descendents (child) we need to pass true.here by default it is false.
+
+            <ul id="menu">
+                <li>Home</li>
+                <li>Blog</li>
+                <li>About</li>
+                <li style="display: none">Project</li>
+            </ul>
+            <script>
+                let menu = document.getElementById("menu");
+
+                // Create a deep clone of the element with all its children
+                let newNode = menu.cloneNode(true);
+
+                console.log(newNode); // Now it will include the <li> children as well
+            </script>        
+
+-------------------------------------------------------------------------------------------------------------------- 
+
+removeChild():
+
+        It is used to remove child from parent element.
+
+        parentNode.removeChild(childNode);
+
+            <ul id="menu">
+                <li>Home</li>
+                <li>Blog</li>
+                <li>About</li>
+                <li style="display: none">Project</li>
+                <li>Contact</li>
+            </ul>
+            <script>
+                let menu = document.getElementById("menu");
+                menu.removeChild(menu.lastElementChild);
+            </script>
+
+-------------------------------------------------------------------------------------------------------------------- 
+
+insertBefore():
+
+    it is use to insert a new node before an existing node as child node of a parentNode.
+
+    Syntax: parentNode.insertBefore(newNode, existingNode)
+
+            <ul id="menu">
+                <li>Home</li>
+                <li>Blog</li>
+                <li>About</li>
+                <li style="display: none">Project</li>
+                <li>Contact</li>
+            </ul>
+            <script>
+                let menu = document.getElementById("menu");
+                let li = document.createElement("li");
+                li.innerHTML = "Find";
+                menu.insertBefore(li, menu.firstElementChild);
+
+            </script> -- .Find
+                         .Home
+                         .Blog
+                         .About
+                         .Contact  
+
+-------------------------------------------------------------------------------------------------------------------- 
+
+Attribute Methods:
+
+    <input type="text" name="" id="userName" placeholder="userName" />
+
+    here type, id, placeholder are attrb names and "text", "userName", "userName" are values.
+
+    so to get these attrb and we use attrb methods.
+
+            <input type="text" name="" id="userName" placeholder="userName" />
+            <script>
+                let inputBox = document.getElementById("userName");
+                console.log(inputBox.attributes);
+
+            </script> - NamedNodeMap {0: type, 1: name, 2: id, 3: placeholder, type: type, name: name, id: id, placeholder: placeholder, length: 4}
+
+    To get,set and do some other functionalities throught attrbs we can use these methods below:
+        
+-------------------------------------------------------------------------------------------------------------------- 
+getAttribute():
+
+            <input type="text" name="" id="userName" placeholder="userName" />
+            <script>
+                let inputBox = document.getElementById("userName");
+                console.log(inputBox.getAttribute("type"));
+
+            </script> - text
+
+-------------------------------------------------------------------------------------------------------------------- 
+setAttribute():
+
+    Used to set attrb name and value for an html element.
+
+    Syntax: inputBox.setAttribute("attrbName", "value");
+
+            <input type="text" name="" id="userName" placeholder="userName" />
+
+            <script>
+                let inputBox = document.getElementById("userName");
+                inputBox.setAttribute("class", "user");
+                console.log(inputBox);
+
+            </script>    - <input type="text" name="" id="userName" placeholder="userName" class="user" />
+
+-------------------------------------------------------------------------------------------------------------------- 
+hasAttribute():
+
+    It checks whether attrb exists in the elem or not if yes then true else false.
+
+            <input type="text" name="" id="userName" placeholder="userName" />
+            <script>
+                let inputBox = document.getElementById("userName");
+                console.log(inputBox.hasAttribute("class"));
+
+            </script> - false
+   
+-------------------------------------------------------------------------------------------------------------------- removeAttribute():
+
+    Removes attrb from the element.
+
+            <input type="text" name="" id="userName" placeholder="userName" />
+
+            <script>
+                let inputBox = document.getElementById("userName");
+                inputBox.removeAttribute("placeholder");
+                console.log(inputBox);
+
+            </script> - <input type="text" name="" id="userName"/>
+
+-------------------------------------------------------------------------------------------------------------------- 
+Style Property:
+
+1.style property:
+
+        Used to set inline style of an element.
+
+                    <input
+                        type="text"
+                        name=""
+                        id="userName"
+                        placeholder="userName"
+                        style="background: red; font-size: 20px"
+                    />
+
+                    <script>
+                        let inputBox = document.getElementById("userName");
+                        console.log(inputBox.style);
+                    </script>
+
+            It returns this CSSStyleDeclaration {0: 'background-image', 1: 'background-position-x', 2: 'background-position-y', 3: 'background-size', 4: 'background-repeat', 5: 'background-attachment', 6: 'background-origin', 7: 'background-clip', 8: 'background-color', 9: 'font-size', accentColor: '', additiveSymbols: '', alignContent: '', alignItems: '', alignSelf: '', …} here we can see the properties available in the element.
+
+        to get the value we can do this i.e
+        console.log(inputBox.style.background); - red
+
+        We can also use this style to set the property also
+
+            <input type="text" name="" id="userName" placeholder="userName" style="background: red; font-size: 20px"
+            />
+
+            <script>
+                let inputBox = document.getElementById("userName");
+                console.log(inputBox.style);
+                inputBox.style.padding = "10px";
+                console.log(inputBox);
+
+            </script> - It returns this <input type="text" name="" id="userName" placeholder="userName" style="background: red; font-size: 20px" padding="10px" />
+
+    We can use Css text inorder to add mulitple properties  at once to html elems
+    
+                <input type="text" name="" id="userName" placeholder="userName" style="background: red; font-size: 20px"
+                 />
+                <script>
+                    let inputBox = document.getElementById("userName");
+                    console.log(inputBox.style);
+                    inputBox.style.cssText = "width:200px ";
+                    console.log(inputBox);
+                </script>
+
+            It returns this <input type="text" name="" id="userName" placeholder="userName" style= "width:200px" />
+
+            The main problem with this is that it overrides the previous styled elems.
+
+            so to prevent this we can cocatenate operation.
+
+                        <input
+                        type="text"
+                        name=""
+                        id="userName"
+                        placeholder="userName"
+                        style="background: red; font-size: 20px"
+                        />
+
+                        <script>
+                        let inputBox = document.getElementById("userName");
+                        console.log(inputBox.style);
+                        inputBox.style.cssText += "width:200px; height:100px ";
+                        console.log(inputBox);
+                        </script>
+
+            It returns this <input type="text" name="" id="userName" placeholder="userName" style="background: red; font-size: 20px" padding="10px" width:"200px" height:"100px" />
+                        
+--------------------------------------------------------------------------------------------------------------------             
+getComputedStyle():
+
+    To access or get css propertie which are not defined as inline we use this mthod.
+
+    getComputedStyle() is an window obj.
+
+    Syntax: window.getComputedStyle(element, pseudoElement);
+
+        <style>
+            input {
+                background: red;
+                font-size: 12px;
+            }
+        </style>
+        </head>
+        <body>
+            <input type="text" name="" id="userName" placeholder="userName" />
+
+            <script>
+                let inputBox = document.getElementById("userName");
+                console.log(window.getComputedStyle(inputBox));
+                console.log(window.getComputedStyle(inputBox).fontSize); - 12px
+                console.log(window.getComputedStyle(inputBox).background); - red
+
+            </script>
+        </body>   - here it dispalys all the css properties of the element so once exec this in code editor so that you can see all the props, tStamp( 1:02:28 sec) 
+
+-------------------------------------------------------------------------------------------------------------------- 
+
+classNameProperty():
+
+        It returns list of classes seperated by space.
+        We can also use this to add new classNames also.
+
+                <h1 id="title" class="main message">GS</h1>
+                <script>
+                    let title = document.getElementById("title");
+                    console.log(title.className);
+
+                </script> - main message
+
+        Here below example overides old class names and returns <h1 id="title" class="new">GS</h1>
+
+                <h1 id="title" class="main message">GS</h1>
+                <script>
+                    let title = document.getElementById("title");
+                    title.className = "new";
+                    console.log(title);
+
+                </script>                
+
+        To prevent this we use concactenate operation.
+
+                <h1 id="title" class="main message">GS</h1>
+                <script>
+                    let title = document.getElementById("title");
+                    title.className += " new";
+                    console.log(title);
+
+                </script>  - <h1 id="title" class="main message new">GS</h1>
+
+-------------------------------------------------------------------------------------------------------------------- 
+
+classList:
+
+        It returns a collecion of classes in any html element.
+
+        We can add multiple class names in html element.
+
+                <h1 id="title" class="main message">GS</h1>
+
+                <script>
+                let title = document.getElementById("title");
+
+                console.log(title.classList);
+                </script>
+
+        returns DOMTokenList(2) ['main', 'message', value: 'main message']
+
+        We can add, delete one or more classes.
+
+                <h1 id="title" class="main message">GS</h1>
+                <script>
+                    let title = document.getElementById("title");
+                    title.classList.add("new", "new2"); - 
+                    console.log(title); - <h1 id="title" class="main message new new2">GS</h1>
+                </script>
+
+                <h1 id="title" class="main message">GS</h1>
+                <script>
+                    let title = document.getElementById("title");
+                    title.classList.remove("new", "new2"); - 
+                    console.log(title); - <h1 id="title" class="main message">GS</h1>
+
+                </script> 
+
+        We can even replace classes i.e 
+        
+        title.classList.replace("message", "msg"); - <h1 id="title" class="main msg">GS</h1>
+
+        console.log(title.classList.contains("message"));  - true.  (It returns true | false)    
+
+-------------------------------------------------------------------------------------------------------------------- 
+
+Toggle: 
+    
+    If class name is available  in html elemetn it removes else it adds the className to html element.        
+
+            <h1 id="title" class="main message">GS</h1>
+            <script>
+                let title = document.getElementById("title");
+                title.classList.toggle("message");
+
+                console.log(title); - <h1 id="title" class="main ">GS</h1>
+            </script>
+
+            <h1 id="title" class="main message">GS</h1>
+            <script>
+                let title = document.getElementById("title");
+                title.classList.toggle("new");
+
+                console.log(title); - <h1 id="title" class="main message new">GS</h1>
+            </script>
+
+-------------------------------------------------------------------------------------------------------------------- 
+
+Event :
+
+        Event is an action that occurs on the webbrowser.
+
+            when we click on webpage i.e click event.
+            when we move mouse on webpage i.e mouse event.
+            when webpage loads i.e load event.
+             
+            certainly we have some other events.
+
+        When we are clicking on an element then we are clicking on every parent elem also.
+
+        In modern browser this goes upto window object.
+
+
+Event Bubbling: Event starts at the most specfic element and flows towards least specific element.
+
+Event Capturing:  Event starts at the least specfic element and flows towards most specific element.          
+
+    To respond towards these event we use event handlers
+
+Event Handlers:
+
+        An event handler is a piece of code that will be executed when the event occurs.
+
+        It is also called as eventListener.
+
+        every event has its own eventHandler like for(click -> onClick)
+
+            There are 3 ways to assign eventHandlers.
+
+            1) Html event handler Attributes
+
+                    <div id="container">
+                        <button type="button" onclick="console.log('Bnt Clicked');">
+                            Click Here
+                        </button>
+
+                    </div> - Bnt Clicked
+            
+            2) Call Funtion:
+            
+                    <div id="container">
+                        <button type="button" onclick="dispalyMsg()">Click Here</button>
+                    </div>
+                    <script>
+                        function dispalyMsg() {
+                            console.log("Bnt Clicked from function");
+                        }
+
+                    </script>  - Bnt Clicked from function
+                    
+        Whenever an event occurs, the webbrowser passes an event Object to the event Handler.   
+
+                <div id="container">
+                <button type="button" onclick="console.log(event);">
+                <button type="button" onclick="console.log(event.type);">Click Here</button>
+                <button type="button" onclick="console.log(event.target);"> Click Here </button>
+                </div>
+
+                
+            O/P: PointerEvent {isTrusted: true, pointerId: 3, width: 1, height: 1, pressure: 0, …}
+                 click
+                 <button type="button" onclick="console.log(event.target);"> Click Here </button> (3rd O/P)
+
+This keyword:
+
+            this keyword inside the event handler referrs to the target element.
+                
+            i.e    <button type="button" onclick="console.log(this);">Click Here</button> it returns the 3rd(O/P)
+
+            We can use (this) to find properties of target element.
+
+                    <div id="container">
+                        <button id="Bnt" type="button" onclick="console.log(this.id);">Click Here </button>
+
+                    </div>  - Bnt
+
+                                                    OR
+
+                    <div id="container">
+                        <button id="Bnt" type="button" onclick="console.log(id);">Click Here</button>
+
+                    </div>  - Bnt
+                    
+                    
+Adding eventHandler Name in Js:
+
+                    <div id="container">
+                        <button id="Bnt">Click Here</button>
+                    </div>
+                    <script>
+                        let btn = document.getElementById("Bnt");
+                        btn.onclick = function () {
+                            console.log("Bnt CLicked in 2nd way");
+                        };
+                    </script>
+    
+    To remove event Handler we use this technique:
+
+                    
+                    <div id="container">
+                        <button id="Bnt">Click Here</button>
+                    </div>
+                    <script>
+                        let btn = document.getElementById("Bnt");
+                        btn.onclick = null;
+                    </script>
+
+
+3rd Way addEventListener() & removeEventListener():
+
+    These are 2 methods that handles an event.
+
+        addEventListener() will register or activate an event handler.
+        removeEventListener() will remove an event handler.
+
+
+    addEventListener(event,function,useCapture); accepts 3  args i.e event, function that execs when event fires, useCapture.
+
+    here useCapture can be true|false it's default value is false.
+
+    It is related to even Capturing & Bubbling.
+
+        Ex:     <div id="container">
+                    <button id="Bnt">Click Here</button>
+                </div>
+                <script>
+                    let btn = document.getElementById("Bnt");
+
+                    btn.addEventListener("click", function () {
+                            console.log("Bnt is clicked using addEventListener");
+                        });
+                </script>    
+
+    When event occurs the js passes event obj to event handler.
+                
+                <div id="container">
+                    <button id="Bnt">Click Here</button>
+                </div>
+                <script>
+                    let btn = document.getElementById("Bnt");
+
+                    btn.addEventListener("click", function (event) {
+                        console.log(event.type); - click
+                    });
+                </script>
+
+    We can also add external named function also.
+    
+                
+                <div id="container">
+                    <button id="Bnt">Click Here</button>
+                </div>
+                <script>
+                    let btn = document.getElementById("Bnt");
+
+                    function dispalyMsg() {
+                        console.log("Button Clicked");
+                    }
+                    btn.addEventListener("click", dispalyMsg);
+                </script>
+
+    So here the function could be of any type.
+    
+removeEventListener():
+
+                removeEventListener() is used to remove eventListener that was added by addEventListener()
+
+                We can  not remove event listener if the functions is anonymous
+
+                So inorder to both remove and add we need to use external funciton only
+
+                        <div id="container">
+                            <button id="Bnt">Click Here</button>
+                        </div>
+                        <script>
+                            let btn = document.getElementById("Bnt");
+                            
+                            function dispalyMsg() {
+                                console.log("Button Clicked");
+                            }
+
+                            btn.addEventListener("click", dispalyMsg);
+                            btn.removeEventListener("click", dispalyMsg);
+                        </script>                
+
+
+Some of the usefull js events:
+
+    1)mousemove:    Event fires repeatedly when you move the mouse cursor around the element
+
+    2)mousedown:    Event fires when you press the mouse button on the element.
+
+    3)mouseup:      Event fires when you release the mouse button on the element.
+
+    4)mouseover:    Event fires when the cursor moves from outside to inside the boundaries of the element.
+
+    5)mouseout:     Event fires when the cursor is over an element and then moves to another element.
+
+    6)keydown:      Event fires when you press a key on the keyboard & fires repeatedly whild you're holding down 
+                    the key
+
+    7)keyup:        Event fires when you release a key from the keyboard.
+
+    8)keypress:     Event fires when you press a character on kb like a,b,c,.... It fires repeatedly whild you hold 
+                    down the key on keyboard.
+
+    9)Scroll:       Scroll Event fires when you scroll a document or an element            
+-->
